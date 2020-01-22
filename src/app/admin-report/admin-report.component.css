@@ -1,0 +1,50 @@
+h1 {
+    font-family:'Roboto', sans-serif;
+    color: #043F76;
+    text-align:center;
+    display:block;
+    padding-top: 2%;
+    padding-left: 2%;
+  }
+
+  body{
+    background-image: url(https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_1600/http://techfameplus.com/wp-content/uploads/2016/12/Top-12-Colorful-Abstract-Backgroung-Wallpaper-Poster-Design-10.jpg);
+    background-position:center center;
+    background-size:cover;
+    background-repeat:no-repeat;
+    min-height:100vh;
+    font-family:'Roboto', sans-serif;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  th {
+    font-size: 15px;
+    font-weight: bold;
+    color: #043F76;
+  }
+
+  .mat-row:hover {
+    background-color: #909090;
+  }
+  
+  .mat-row:hover .mat-cell {
+      color: whitesmoke;
+  }
+  
+  .mat-footer-row:first-child td {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  
+  .mat-form-field {
+    font-size: 18px;
+    width: 100%;
+    padding: 0 2%;
+  }
+  
+  
+  
+  
+  

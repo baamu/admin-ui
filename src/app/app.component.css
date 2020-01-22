@@ -1,0 +1,29 @@
+html > body {
+    height: 100%;
+}
+
+.navbar{
+    justify-content: space-between;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+span{
+    padding-right: 1rem;
+}
+.mat-toolbar.mat-primary{
+    background: #1d1033; 
+    color: #fff;
+}
+
+.nav-bar-color {
+    background-color: #0a4969 !important;
+}
+
+#brand {
+    color: whitesmoke;
+    /* font-weight: bold; */
+    font-size: 1.7rem;
+    font-family: 'Odibee Sans', cursive;
+}
+
+  
