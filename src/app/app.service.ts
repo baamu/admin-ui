@@ -16,25 +16,11 @@ const BASE_URL = "http://3.81.95.4:8080";
   providedIn: 'root'
 })
 export class AppService {
+  setRepoName(repoName: string) {
+    throw new Error("Method not implemented.");
+  }
 
   constructor(private http : HttpClient, @Inject(SESSION_STORAGE) private storage: WebStorageService) { }
-
-  register(email:string, name:string, username:string, nic:string, dob:string, password:string) {
-    var user = {
-      "email" : email,
-      "name" : name,
-      "username" : username,
-      "nic" : nic,
-      "dob" : dob,
-      "password" : password
-    }
-
-    return this.http.post(BASE_URL+'/api/public/user/register', user, {headers: request_headers, observe : "response"})
-    .pipe(
-      map(response => {return response.body})
-    );
-
-  }
 
   login(email:string, password:string) {
     
@@ -59,28 +45,7 @@ export class AppService {
 
   }
 
-  addDownload(url:string) {
-
-    console.log(url)
-    //cannot send a request if not logged in
-    if(!this.storage.get("token")) {
-      console.log("no auth header is set")
-      return null;
-    } else {
-      console.log("Token " + this.storage.get('token'));
-    }
-
-    var payload = {
-      "url" : url
-    }
-
-    return this.http.post(BASE_URL+'/api/public/download/add', payload, {headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"})
-    .pipe(
-      map(response => {return response.body})
-    )
-
-  }
-
+  
   getOnGoingDownloads() : Observable<any> {
     if(!this.storage.get("token")) {
       console.log("no auth header is set")
@@ -89,7 +54,7 @@ export class AppService {
       console.log("Token " + this.storage.get('token'));
     }
     
-    return this.http.get<Array<any>>(BASE_URL+'/api/public/download/getall',{headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"})
+    return this.http.get<Array<any>>(BASE_URL+'/api/admin/download/get-all',{headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"})
     .pipe(
       map(response => {return response.body;})
     );
@@ -104,13 +69,44 @@ export class AppService {
       console.log("Token " + this.storage.get('token'));
     }
 
-    return this.http.get<Array<any>>(BASE_URL+'/api/public/download/history',{headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"})
+    return this.http.get<Array<any>>(BASE_URL+'/api/admin/download/history',{headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"})
     .pipe(
       map(response => {return response.body;})
     );
   }
 
+  removeDownload(id:number){
+    if(!this.storage.get("token")) {
+      console.log("no auth header is set")
+      return null;
+    } else {
+      console.log("Token " + this.storage.get('token'));
+    }
+    var payload = {
+      "id" : id
+    }
 
+    return this.http.get(BASE_URL+'/api/admin/download/remove',  {headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"})
+    .pipe(
+      map(response => {return response.body})
+    )
+
+  }
+
+
+  logout():void {
+    this.http.get(BASE_URL+'/logout',  {headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"});
+    
+    this.storage.remove("token");
+  }
+
+  isLogged():boolean {
+    if(!this.storage.get("token")) {
+      return false;
+    } else {
+      return true;
+    } 
+  }
 
 
 }

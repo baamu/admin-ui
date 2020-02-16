@@ -8,44 +8,35 @@ import { AngularMaterialModule } from './angular-material.module';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-
-
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule, MatInputModule} from '@angular/material';
+import {MatNativeDateModule, MatInputModule, MatDialogModule} from '@angular/material';
  
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { StorageServiceModule } from 'angular-webstorage-service';
 import { AdminHistoryComponent } from './admin-history/admin-history.component';
 import { AdminManageusersComponent } from './admin-manageusers/admin-manageusers.component';
-import { AdminReportComponent } from './admin-report/admin-report.component';
-import { AdminAdduserComponent } from './admin-adduser/admin-adduser.component';
 import { AdminRepositoryComponent } from './admin-repository/admin-repository.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
-
-
-
+import {AdminManagedownloadComponent} from './admin-managedownload/admin-managedownload.component';
+import { PopupComponent } from './popup/popup.component';
 
 
 @NgModule({ 
   declarations: [
-    AppComponent,
-    
+    AppComponent,  
     routingComponents,
-    
-    
-    
     AdminHistoryComponent,
     AdminManageusersComponent,
-    AdminReportComponent,
-    AdminAdduserComponent,
     AdminRepositoryComponent,
     AdminLoginComponent,
+    AdminManagedownloadComponent,
+    PopupComponent,
   ],
+  entryComponents: [PopupComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -57,9 +48,9 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    StorageServiceModule
-
-
+    StorageServiceModule,
+    MatDialogModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

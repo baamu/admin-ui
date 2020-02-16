@@ -20,17 +20,13 @@ table {
 }
 
 th {
-  font-size: 15px;
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(65, 86, 110);
+}
+
+td{
   font-weight: bold;
-  color: #043F76;
-}
-
-.mat-row:hover {
-  background-color: #909090;
-}
-
-.mat-row:hover .mat-cell {
-    color: whitesmoke;
 }
 
 .mat-footer-row:first-child td {
@@ -39,11 +35,14 @@ th {
 
 .mat-form-field {
   font-size: 18px;
+  font-weight: bold;
   width: 100%;
-  padding: 0 2%;
+  padding: 0 30%;
+  color: #03315c;
+  text-align: center;
 }
 
-button {
+.btn-search {
   padding: 0 6px 0 6px;
   margin: 6px 8px 6px 8px;
   min-width: 88px;
@@ -58,6 +57,14 @@ button {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   color: #ffffff;
   background-color: #0a4969;
+}
+
+.btn-delete { 
+  color: #b61717;
+}
+
+.btn-edit { 
+  color: #0a4969;
 }
 
 

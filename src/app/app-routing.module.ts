@@ -2,23 +2,23 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
-import { AdminAdduserComponent } from './admin-adduser/admin-adduser.component';
 import { AdminHistoryComponent } from './admin-history/admin-history.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminManageusersComponent } from './admin-manageusers/admin-manageusers.component';
-import { AdminReportComponent } from './admin-report/admin-report.component';
 import { AdminRepositoryComponent } from './admin-repository/admin-repository.component';
+import { AdminManagedownloadComponent } from './admin-managedownload/admin-managedownload.component';
+import { PopupComponent } from './popup/popup.component';
 
 
 const routes: Routes = [
   
-  {path: 'adduser', component: AdminAdduserComponent},
   {path: 'history', component: AdminHistoryComponent},
   {path: 'login', component: AdminLoginComponent},
   {path: 'manageuser', component: AdminManageusersComponent},
-  {path: 'report', component: AdminReportComponent},
   {path: 'repository', component: AdminRepositoryComponent},
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: 'managedownload', component: AdminManagedownloadComponent},
+  {path: 'popup', component: PopupComponent},
+  {path: '', redirectTo: 'managedownload', pathMatch: 'full'},
 ];
 
  

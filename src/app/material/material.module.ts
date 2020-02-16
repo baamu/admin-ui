@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -10,3 +10,5 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class MaterialModule { }
+
+

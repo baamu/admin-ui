@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import {
    MatButtonModule,
@@ -20,7 +21,8 @@ import {
    MatPaginatorModule,
    MatButtonToggle,
    MatButtonToggleModule,
-   MatProgressSpinnerModule
+   MatProgressSpinnerModule,
+   MatDialogModule
 } from '@angular/material';
 import { MatBadgeModule } from '@angular/material/badge';
 
@@ -30,6 +32,9 @@ const Material = [
    MatIconModule,
    MatBadgeModule,
    MatProgressSpinnerModule,
+   MatFormFieldModule,
+   MatProgressBarModule,
+   MatDialogModule,
    MatToolbarModule
 ];
 
@@ -53,6 +58,8 @@ const Material = [
       MatTooltipModule,
       MatTableModule,
       MatPaginatorModule,
+      MatIconModule,
+      MatDialogModule,
       Material
    ],
    exports: [
@@ -72,6 +79,8 @@ const Material = [
       MatTooltipModule,
       MatTableModule,
       MatPaginatorModule,
+      MatIconModule,
+      MatDialogModule,
       Material
    ],
    providers: [

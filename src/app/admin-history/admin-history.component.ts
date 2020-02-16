@@ -3,12 +3,13 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { AppService } from '../app.service';
 
 export interface DownloadHistory {
+  id:number;
+  name:string;
   url:string;
   added_date:string;
   downloaded_date:string;
-  file_size:string;
+  file_size:number;
 }
-
 
 @Component({
   selector: 'app-admin-history',
@@ -16,51 +17,29 @@ export interface DownloadHistory {
   styleUrls: ['./admin-history.component.css']
 })
 export class AdminHistoryComponent implements OnInit {
-
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  dataSource : MatTableDataSource<DownloadHistory[]> = new MatTableDataSource();
   displayedColumns: string[] = ['name', 'url', 'added_date', 'downloaded_date','file_size','delete'];
-  selection: any;
-  
+  // dataSource = MatTableDataSource<DownloadHistory[]> = new MatTableDataSource();
+  datasource : MatTableDataSource<DownloadHistory[]> = new MatTableDataSource();
 
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
+  constructor(private service: AppService) {}
+
+  ngOnInit(): void {
+    this.service.getOnGoingDownloads().subscribe(Response =>{
+      this.datasource.sort = this.sort;
+    })
+    this.datasource.paginator = this.paginator;
+    this.datasource.sort = this.sort;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+  applyFilter(filtervalue:string) {
+    this.datasource.filter = filtervalue.trim().toLowerCase();
+    if (this.datasource.paginator){
+      this.datasource.paginator.firstPage();
+    }
+
   }
 
-  constructor(private service : AppService) {
-
-   }
-
-  ngOnInit() {
-    this.service.getOnGoingDownloads().subscribe(response => {
-      this.dataSource.data=response;
-  })
-
-  this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-
 }
-
-applyFilter(filterValue: string) {
-  this.dataSource.filter = filterValue.trim().toLowerCase();
-
-  if (this.dataSource.paginator) {
-    this.dataSource.paginator.firstPage();
-  }
-}
-
-
-
-}
-
