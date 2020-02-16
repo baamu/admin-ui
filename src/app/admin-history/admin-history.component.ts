@@ -6,8 +6,8 @@ export interface DownloadHistory {
   id:number;
   name:string;
   url:string;
-  added_date:string;
-  downloaded_date:string;
+  addedDate:string;
+  downloadedDate:string;
   file_size:number;
 }
 

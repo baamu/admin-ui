@@ -24,7 +24,7 @@ export class AdminLoginComponent implements OnInit {
     this.appService.login(email, password)
       .subscribe(response => {
           console.log(response)
-          this._router.navigate(["/add"]);
+          this._router.navigate(["/repository"]);
         },
         error => {
           console.log("error ", error);

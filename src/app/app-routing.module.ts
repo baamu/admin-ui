@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+
 import { Routes, RouterModule } from '@angular/router';
 
 
@@ -8,6 +8,7 @@ import { AdminManageusersComponent } from './admin-manageusers/admin-manageusers
 import { AdminRepositoryComponent } from './admin-repository/admin-repository.component';
 import { AdminManagedownloadComponent } from './admin-managedownload/admin-managedownload.component';
 import { PopupComponent } from './popup/popup.component';
+import { NgModule } from '@angular/core';
 
 
 const routes: Routes = [
@@ -29,9 +30,6 @@ const routes: Routes = [
  
 })
 export class AppRoutingModule { 
-  static forRoot(): any[] | import("@angular/core").Type<any> | import("@angular/core").ModuleWithProviders<{}> {
-    throw new Error("Method not implemented.");
-  }
   
 }
 

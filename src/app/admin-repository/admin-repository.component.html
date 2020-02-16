@@ -9,9 +9,9 @@
   
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <ng-container matColumnDef="filename">
+  <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> File Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.filename}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
 
   <ng-container matColumnDef="url">
@@ -19,15 +19,15 @@
     <td mat-cell *matCellDef="let element"> {{element.url}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="filesize">
+  <ng-container matColumnDef="file_size">
     <th mat-header-cell *matHeaderCellDef> File Size </th>
-    <td mat-cell *matCellDef="let element"> {{element.filesize}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.file_size}} </td>
   </ng-container>
 
   <ng-container matColumnDef="delete">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element"> {{element.delete}} 
-        <button mat-icon-button class="btn-delete" type="submit"><mat-icon>delete</mat-icon></button>
+        <button mat-icon-button class="btn-delete" type="submit" (click)="delete(element.id)"><mat-icon>delete</mat-icon></button>
     </td>
 </ng-container>
 

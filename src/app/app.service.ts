@@ -10,7 +10,7 @@ let request_headers = new HttpHeaders(
   }
 );
 
-const BASE_URL = "http://3.81.95.4:8080";
+const BASE_URL = "http://10.22.166.122:8080";
 
 @Injectable({
   providedIn: 'root'
@@ -75,6 +75,35 @@ export class AppService {
     );
   }
 
+  getRepo() : Observable<any> {
+    if(!this.storage.get("token")) {
+      console.log("no auth header is set")
+      return null;
+    } else {
+      console.log("Token " + this.storage.get('token'));
+    }
+
+    return this.http.get<Array<any>>(BASE_URL+'/api/admin/repository/get-all',{headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"})
+    .pipe(
+      map(response => {return response.body;})
+    );
+  }
+
+  removeFile(id) {
+    console.log("deleting : ", id)
+    if(!this.storage.get("token")) {
+      console.log("no auth header is set")
+      return null;
+    } else {
+      console.log("Token " + this.storage.get('token'));
+    }
+
+    return this.http.get(BASE_URL+'/api/admin/repository/delete?id='+id,  {headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"})
+    .pipe(
+      map(response => {return response.body})
+    )
+  }
+
   removeDownload(id:number){
     if(!this.storage.get("token")) {
       console.log("no auth header is set")
@@ -91,6 +120,21 @@ export class AppService {
       map(response => {return response.body})
     )
 
+  }
+
+
+  getUsers() {
+    if(!this.storage.get("token")) {
+      console.log("no auth header is set")
+      return null;
+    } else {
+      console.log("Token " + this.storage.get('token'));
+    }
+
+    return this.http.get<Array<any>>(BASE_URL+'/api/admin/user/get-all',{headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"})
+    .pipe(
+      map(response => {return response.body;})
+    );
   }
 
 

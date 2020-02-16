@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import{NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
@@ -23,6 +22,7 @@ import { AdminRepositoryComponent } from './admin-repository/admin-repository.co
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import {AdminManagedownloadComponent} from './admin-managedownload/admin-managedownload.component';
 import { PopupComponent } from './popup/popup.component';
+import { AppService } from './app.service';
 
 
 @NgModule({ 
@@ -52,7 +52,7 @@ import { PopupComponent } from './popup/popup.component';
     MatDialogModule
     
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
