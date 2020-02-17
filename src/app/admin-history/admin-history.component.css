@@ -60,6 +60,16 @@ td{
   background-color: #0a4969;
 }
 
+#btn-search:hover {
+  color: #0a4969;
+  background-color: #ffffff;
+}
+
+#btn-search {
+  color: #ffffff;
+  background-color: #0a4969;
+}
+
 .btn-delete { 
   color: #b61717;
 }

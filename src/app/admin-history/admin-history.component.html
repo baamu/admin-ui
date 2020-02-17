@@ -3,6 +3,11 @@
   <h1><b>USER HISTORY</b></h1>
   <br>
   
+  <form class="form-inline md-form mr-auto mb-4"[formGroup]="form" (ngSubmit) = "formSubmit()" >
+    <input class="form-control mr-sm-2" type="text" placeholder="Search User" aria-label="Search" formControlName="user"> 
+    <button type="submit" mat-raised-button color="accent" class="btn-search" id="btn-search">Search</button>
+  </form>
+
   <mat-form-field >
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Downloads">
   </mat-form-field>

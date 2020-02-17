@@ -26,4 +26,9 @@ span{
     font-family: 'Odibee Sans', cursive;
 }
 
+#logout{
+    margin-right: 20px;
+    cursor: pointer;
+}
+
   

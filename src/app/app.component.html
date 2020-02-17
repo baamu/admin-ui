@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light, navbar navbar-dark nav-bar-color">
+<nav class="navbar navbar-expand-lg navbar-light bg-light, navbar navbar-dark nav-bar-color" *ngIf="show">
         
       <a class="navbar-brand" id="brand" href="managedownload">Night Wolf<span class="sr-only">(current)</span></a>
      
@@ -9,19 +9,18 @@
     
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                  <li class="nav-item active">
+                  <li>
                         <a class="nav-link" href="manageuser">Manage User <span class="sr-only">(current)</span></a>
                   </li>
-                  <li class="nav-item active">
+                  <li>
                         <a class="nav-link" href="repository">Local Rerpository <span class="sr-only">(current)</span></a>
                   </li>
-                  <li class="nav-item active">
+                  <li>
                               <a class="nav-link" href="history">History <span class="sr-only">(current)</span></a>
                   </li>
-                  <li class="nav-item active">
-                        <a class="nav-link" href="login">Login <span class="sr-only">(current)</span></a>
+                  <li align-right id="logout">
+                        <a class="nav-link" (click)="logout()" >Logout <span class="sr-only">(current)</span></a>
                   </li>
-                  
                   
             </ul>   
       </div>

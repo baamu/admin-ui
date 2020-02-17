@@ -211,6 +211,21 @@ export class AppService {
     );
   }
 
+  //get downloads by user
+  getUserDownloads(id) {
+    if(!this.storage.get("token")) {
+      console.log("no auth header is set")
+      return null;
+    } else {
+      console.log("Token " + this.storage.get('token'));
+    }
+
+    return this.http.get<Array<any>>(BASE_URL+'/api/admin/user/downloads?id='+id,{headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"})
+    .pipe(
+      map(response => {return response.body;})
+    );
+  }
+
   //logout
   logout():void {
     this.http.get(BASE_URL+'/logout',  {headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"});
