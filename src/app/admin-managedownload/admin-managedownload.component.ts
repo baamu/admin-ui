@@ -1,21 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { AppService } from '../app.service';
 
-
-export interface PeriodicElement {
-  name: string;
-  size: string;
-  completed: string;
-  remain: string;
+export interface Download {
+  id: string;
+  userId: number;
+  url: number;
+  fileName:string;
+  downloadedSize: string;
+  fileSize:string;
+  completed:string;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {name: 'abc', size: '57MB', completed: '25MB', remain: '32MB'},
-  {name: 'gft', size: '57MB', completed: '25MB', remain: '32MB'},
-  {name: 'vcx', size: '57MB', completed: '25MB', remain: '32MB'},
-  {name: 'ewq', size: '57MB', completed: '25MB', remain: '32MB'},
-  {name: 'pyt', size: '57MB', completed: '25MB', remain: '32MB'},
-];
-
 
 @Component({
   selector: 'app-admin-managedownload',
@@ -25,10 +20,72 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 export class AdminManagedownloadComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'size', 'completed', 'remain', 'btns'];
-  dataSource = ELEMENT_DATA;
-  constructor() { }
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  displayedColumns: string[] = ['fileName', 'downloadedSize', 'fileSize', 'completed', 'btns'];
+  // dataSource = ELEMENT_DATA;
+  dataSource : MatTableDataSource<Download> = new MatTableDataSource();
+
+  constructor(private service : AppService) { }
 
   ngOnInit() {
+    this.loadData();
+
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
+
+  loadData() {
+    this.service.getOnGoingDownloads().subscribe(response => {
+      this.dataSource.data=response;
+      console.log(response);
+    })
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  //start downloading
+  startDownloading() {
+    this.service.startDownloading().subscribe(response => {
+      console.log("Started downloads!");
+    })
+  }
+
+  //stop downloading
+  stopDownloading() {
+    this.service.stopDownloading().subscribe(response => {
+      alert("Stopped downloading!");
+    })
+  }
+
+  //pause download
+  pauseDownload(download: Download) {
+    this.service.pauseDownload(download).subscribe(response => {
+      console.log("download paused!");
+    })
+  }
+
+  //resume download
+  resumeDownload(download: Download) {
+    this.service.resumeDownload(download).subscribe(response => {
+      console.log("download resumed!");
+    })
+  }
+
+  //remove download
+  removeDownload(download: Download) {
+    this.service.removeDownload(download).subscribe(response => {
+      console.log("download removed!");
+
+      this.loadData();
+    })
+  }
+
 }

@@ -47,14 +47,17 @@ body{
 
   .btn-pause{
       color: rgb(245, 230, 16);
+      width: 100px;
   }
 
   .btn-resume {
     color: #088b3b;
+    padding-right: 3px;
   }
 
   .btn-cancel { 
     color: #b61717;
+    padding-right: 3px;
   }
 
   

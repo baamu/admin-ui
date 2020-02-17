@@ -9,6 +9,7 @@ export interface DownloadHistory {
   addedDate:string;
   downloadedDate:string;
   file_size:number;
+  user:string;
 }
 
 @Component({
@@ -20,7 +21,7 @@ export class AdminHistoryComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  displayedColumns: string[] = ['name', 'url', 'added_date', 'downloaded_date','file_size','delete'];
+  displayedColumns: string[] = ['name', 'user', 'added_date', 'downloaded_date','file_size','delete'];
   // dataSource = MatTableDataSource<DownloadHistory[]> = new MatTableDataSource();
   datasource : MatTableDataSource<DownloadHistory[]> = new MatTableDataSource();
 

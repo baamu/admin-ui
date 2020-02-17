@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service';
 import { Observable } from 'rxjs';
+import { Download } from './admin-managedownload/admin-managedownload.component';
 
 let request_headers = new HttpHeaders(
   {
@@ -22,6 +23,7 @@ export class AppService {
 
   constructor(private http : HttpClient, @Inject(SESSION_STORAGE) private storage: WebStorageService) { }
 
+  //login
   login(email:string, password:string) {
     
     var user = {
@@ -45,7 +47,7 @@ export class AppService {
 
   }
 
-  
+  //get ongoing downloads
   getOnGoingDownloads() : Observable<any> {
     if(!this.storage.get("token")) {
       console.log("no auth header is set")
@@ -61,7 +63,8 @@ export class AppService {
 
   }
 
-  getDownloadHistory() : Observable<any> {
+  //pause download
+  pauseDownload(download: Download) {
     if(!this.storage.get("token")) {
       console.log("no auth header is set")
       return null;
@@ -69,12 +72,99 @@ export class AppService {
       console.log("Token " + this.storage.get('token'));
     }
 
-    return this.http.get<Array<any>>(BASE_URL+'/api/admin/download/history',{headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"})
+    var down = {
+      "id" : download.id,
+      "url" : download.url,
+      "userId" : download.userId,
+      "fileSize" : download.fileSize,
+      "fileName" : download.fileName
+    }
+
+    return this.http.post(BASE_URL+'/api/admin/download/pause', down, {headers: request_headers, observe : "response"})
     .pipe(
-      map(response => {return response.body;})
+      map(response => {return response.body})
     );
   }
 
+  //resume download
+  resumeDownload(download: Download) {
+    if(!this.storage.get("token")) {
+      console.log("no auth header is set")
+      return null;
+    } else {
+      console.log("Token " + this.storage.get('token'));
+    }
+
+    var down = {
+      "id" : download.id,
+      "url" : download.url,
+      "userId" : download.userId,
+      "fileSize" : download.fileSize,
+      "fileName" : download.fileName
+    }
+
+    return this.http.post(BASE_URL+'/api/admin/download/resume', down, {headers: request_headers, observe : "response"})
+    .pipe(
+      map(response => {return response.body})
+    );
+  }
+
+  //remove download
+  removeDownload(download: Download) {
+    if(!this.storage.get("token")) {
+      console.log("no auth header is set")
+      return null;
+    } else {
+      console.log("Token " + this.storage.get('token'));
+    }
+
+    var down = {
+      "id" : download.id,
+      "url" : download.url,
+      "userId" : download.userId,
+      "fileSize" : download.fileSize,
+      "fileName" : download.fileName
+    }
+
+    return this.http.post(BASE_URL+'/api/admin/download/stop', down, {headers: request_headers, observe : "response"})
+    .pipe(
+      map(response => {return response.body})
+    );
+  }
+
+  //start downloading
+  startDownloading() {
+    if(!this.storage.get("token")) {
+      console.log("no auth header is set")
+      return null;
+    } else {
+      console.log("Token " + this.storage.get('token'));
+    }
+
+    return this.http.get(BASE_URL+'/api/admin/download/start',  {headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"})
+    .pipe(
+      map(response => {return response.body})
+    )
+  }
+
+  //stop downloading
+  stopDownloading() {
+    if(!this.storage.get("token")) {
+      console.log("no auth header is set")
+      return null;
+    } else {
+      console.log("Token " + this.storage.get('token'));
+    }
+
+    return this.http.get(BASE_URL+'/api/admin/download/stop-all',  {headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"})
+    .pipe(
+      map(response => {return response.body})
+    )
+
+  }
+
+
+  //get files list in repository
   getRepo() : Observable<any> {
     if(!this.storage.get("token")) {
       console.log("no auth header is set")
@@ -89,6 +179,7 @@ export class AppService {
     );
   }
 
+  //delete file from repository
   removeFile(id) {
     console.log("deleting : ", id)
     if(!this.storage.get("token")) {
@@ -104,25 +195,8 @@ export class AppService {
     )
   }
 
-  removeDownload(id:number){
-    if(!this.storage.get("token")) {
-      console.log("no auth header is set")
-      return null;
-    } else {
-      console.log("Token " + this.storage.get('token'));
-    }
-    var payload = {
-      "id" : id
-    }
 
-    return this.http.get(BASE_URL+'/api/admin/download/remove',  {headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"})
-    .pipe(
-      map(response => {return response.body})
-    )
-
-  }
-
-
+  //get registered users
   getUsers() {
     if(!this.storage.get("token")) {
       console.log("no auth header is set")
@@ -137,7 +211,7 @@ export class AppService {
     );
   }
 
-
+  //logout
   logout():void {
     this.http.get(BASE_URL+'/logout',  {headers:request_headers.append("Authorization",this.storage.get("token")), observe:"response"});
     

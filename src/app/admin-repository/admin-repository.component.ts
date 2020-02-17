@@ -16,7 +16,7 @@ export class AdminRepositoryComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  displayedColumns: string[] = ['name', 'url', 'file_size', 'delete'];
+  displayedColumns: string[] = ['name', 'user', 'file_size', 'downloadedDate', 'delete'];
   dataSource : MatTableDataSource<DownloadHistory> = new MatTableDataSource();
   
   constructor(private service : AppService, private router: Router) { }
