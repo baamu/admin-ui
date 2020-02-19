@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'repository', component: AdminRepositoryComponent},
   {path: 'managedownload', component: AdminManagedownloadComponent},
   {path: 'popup', component: PopupComponent},
-  {path: '', redirectTo: 'managedownload', pathMatch: 'full'},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
 ];
 
  

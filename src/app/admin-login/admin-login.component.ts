@@ -24,7 +24,7 @@ export class AdminLoginComponent implements OnInit {
     this.appService.login(email, password)
       .subscribe(response => {
           console.log(response)
-          this._router.navigate(["/repository"]);
+          this._router.navigate(["/managedownload"]);
         },
         error => {
           console.log("error ", error);
@@ -32,6 +32,8 @@ export class AdminLoginComponent implements OnInit {
           this.form.reset();
         }
       );
+
+      // this._router.navigate(["/repository"]);
 
   }
 

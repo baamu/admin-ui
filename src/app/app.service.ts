@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service';
 import { Observable } from 'rxjs';
 import { Download } from './admin-managedownload/admin-managedownload.component';
+import { Router } from '@angular/router';
 
 let request_headers = new HttpHeaders(
   {
@@ -21,7 +22,7 @@ export class AppService {
     throw new Error("Method not implemented.");
   }
 
-  constructor(private http : HttpClient, @Inject(SESSION_STORAGE) private storage: WebStorageService) { }
+  constructor(private http : HttpClient, @Inject(SESSION_STORAGE) private storage: WebStorageService, private _router: Router) { }
 
   //login
   login(email:string, password:string) {
